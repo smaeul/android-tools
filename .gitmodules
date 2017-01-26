@@ -1,0 +1,12 @@
+[submodule "boringssl"]
+	path = boringssl
+	url = https://boringssl.googlesource.com/boringssl
+[submodule "core"]
+	path = core
+	url = https://android.googlesource.com/platform/system/core
+[submodule "extras"]
+	path = extras
+	url = https://android.googlesource.com/platform/system/extras
+[submodule "libselinux"]
+	path = libselinux
+	url = https://android.googlesource.com/platform/external/libselinux
