@@ -7,9 +7,9 @@
 [submodule "extras"]
 	path = extras
 	url = https://android.googlesource.com/platform/system/extras
-[submodule "libselinux"]
-	path = libselinux
-	url = https://android.googlesource.com/platform/external/libselinux
 [submodule "libusb"]
 	path = libusb
 	url = https://android.googlesource.com/platform/external/libusb
+[submodule "selinux"]
+	path = selinux
+	url = https://android.googlesource.com/platform/external/selinux
