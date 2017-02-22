@@ -29,6 +29,7 @@ LIBADB_CXXFLAGS := \
     $(ADB_COMMON_CXXFLAGS) \
     -fvisibility=hidden \
     -I$(srcdir)/core/adb \
+    -I$(srcdir)/libusb/include \
 
 LIBADB_SRC_FILES := \
     adb.cpp \
@@ -37,6 +38,9 @@ LIBADB_SRC_FILES := \
     adb_listeners.cpp \
     adb_trace.cpp \
     adb_utils.cpp \
+    client/usb_dispatch.cpp \
+    client/usb_libusb.cpp \
+    client/usb_linux.cpp \
     fdevent.cpp \
     sockets.cpp \
     socket_spec.cpp \
@@ -45,7 +49,6 @@ LIBADB_SRC_FILES := \
     transport.cpp \
     transport_local.cpp \
     transport_usb.cpp \
-    usb_linux.cpp \
 
 LIBADB_OBJ_FILES := \
     $(patsubst %.cpp,obj/libadb/%.o,$(LIBADB_SRC_FILES))
@@ -95,17 +98,14 @@ ADB_CXXFLAGS := \
     -D_GNU_SOURCE \
     -I$(srcdir)/core/adb \
 
-#ADB_LDFLAGS := \
-#    -Lob
-#    -lcrypto
-
 ADB_LIBS := \
     libadb \
-	libbase \
-	libcrypto \
-	libcrypto_utils \
-	libcutils \
+    libbase \
+    libcrypto \
+    libcrypto_utils \
+    libcutils \
     libdiagnose_usb \
+    libusb \
 
 ADB_SRC_FILES := \
     adb_client.cpp \

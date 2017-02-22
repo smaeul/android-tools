@@ -32,7 +32,7 @@ LIBCUTILS_SRC_FILES := \
     native_handle.c \
     open_memstream.c \
     record_stream.c \
-    sched_policy.c \
+    sched_policy.cpp \
     sockets.cpp \
     socket_inaddr_any_server_unix.c \
     socket_local_client_unix.c \

@@ -10,3 +10,6 @@
 [submodule "libselinux"]
 	path = libselinux
 	url = https://android.googlesource.com/platform/external/libselinux
+[submodule "libusb"]
+	path = libusb
+	url = https://android.googlesource.com/platform/external/libusb

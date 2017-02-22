@@ -16,6 +16,7 @@ include rules/boringssl.mk
 include rules/libbase.mk
 include rules/libcrypto_utils.mk
 include rules/libcutils.mk
+include rules/libusb.mk
 
 BINS := $(sort $(BINS))
 DIRS := $(sort $(DIRS))
