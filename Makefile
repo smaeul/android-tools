@@ -12,10 +12,10 @@ clean:
 	rm -fr obj
 
 include rules/adb.mk
-include rules/base.mk
 include rules/boringssl.mk
-include rules/crypto_utils.mk
-include rules/cutils.mk
+include rules/libbase.mk
+include rules/libcrypto_utils.mk
+include rules/libcutils.mk
 
 BINS := $(sort $(BINS))
 DIRS := $(sort $(DIRS))
