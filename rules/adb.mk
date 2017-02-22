@@ -124,12 +124,13 @@ ADB_LIB_DEPS := \
 ADB_OBJ_FILES := \
     $(patsubst %.cpp,obj/adb/%.o,$(ADB_SRC_FILES))
 
+BINS += $(ADB_BINARY)
 DIRS += $(dir $(ADB_OBJ_FILES))
 
 adb: $(ADB_BINARY)
 
 $(ADB_BINARY): $(ADB_OBJ_FILES) $(ADB_LIB_DEPS) | dirs
-	$(CXX) $(ADB_CXXFLAGS) $(CXXFLAGS) $(ADB_LDFLAGS) $(LDFLAGS) -o $@ $^
+	$(CXX) $(ADB_CXXFLAGS) $(CXXFLAGS) -o $@ $^ $(ADB_LDFLAGS) $(LDFLAGS)
 
 $(ADB_OBJ_FILES): obj/adb/%.o: $(srcdir)/core/adb/%.cpp | dirs
 	$(CXX) $(ADB_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
