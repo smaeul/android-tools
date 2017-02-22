@@ -13,3 +13,6 @@
 [submodule "selinux"]
 	path = selinux
 	url = https://android.googlesource.com/platform/external/selinux
+[submodule "pcre"]
+	path = pcre
+	url = https://android.googlesource.com/platform/external/pcre

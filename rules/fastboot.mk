@@ -25,17 +25,16 @@ FASTBOOT_LDFLAGS := \
     -lz \
 
 FASTBOOT_LIBS := \
-    libziparchive \
     libbase \
     libcutils \
     libdiagnose_usb \
-    liblog \
-    libsparse \
-    libutils \
-    #libext4_utils \
-    libgtest_host \
+    libext4_utils \
     libselinux \
-    libz \
+    libsparse \
+    libziparchive \
+    liblog \
+    libpcre \
+    libutils \
 
 FASTBOOT_SRC_FILES := \
     bootimg_utils.cpp \
