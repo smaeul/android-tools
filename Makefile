@@ -24,6 +24,7 @@ LDFLAGS += \
     -Wl,-z,noexecstack \
     -Wl,-z,now \
     -Wl,-z,relro
+PREFIX = /usr
 
 all:
 
@@ -55,4 +56,7 @@ dirs: $(DIRS)
 $(DIRS):
 	mkdir -p $@
 
-.PHONY: all clean dirs
+install: $(BINS)
+	install -Dm0755 $(BINS) $(DESTDIR)$(PREFIX)/bin
+
+.PHONY: all clean dirs install
