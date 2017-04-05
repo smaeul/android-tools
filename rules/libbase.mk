@@ -12,6 +12,7 @@ LIBBASE_CXXFLAGS := \
     -Wexit-time-destructors \
 
 LIBBASE_SRC_FILES := \
+    chrono_utils.cpp \
     errors_unix.cpp \
     file.cpp \
     logging.cpp \

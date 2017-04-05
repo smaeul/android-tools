@@ -10,9 +10,12 @@
 [submodule "libusb"]
 	path = libusb
 	url = https://android.googlesource.com/platform/external/libusb
-[submodule "selinux"]
-	path = selinux
-	url = https://android.googlesource.com/platform/external/selinux
+[submodule "mdnsresponder"]
+	path = mdnsresponder
+	url = https://android.googlesource.com/platform/external/mdnsresponder
 [submodule "pcre"]
 	path = pcre
 	url = https://android.googlesource.com/platform/external/pcre
+[submodule "selinux"]
+	path = selinux
+	url = https://android.googlesource.com/platform/external/selinux

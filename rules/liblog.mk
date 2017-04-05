@@ -35,6 +35,7 @@ LIBLOG_SRC_FILES := \
     logger_read.c \
     logger_write.c \
     logprint.c \
+    stderr_write.c \
 
 LIBLOG_C_OBJ_FILES := \
     $(patsubst %.c,obj/liblog/%.o,$(filter %.c,$(LIBLOG_SRC_FILES)))

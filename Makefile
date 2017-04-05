@@ -38,6 +38,7 @@ include rules/libcrypto_utils.mk
 include rules/libcutils.mk
 include rules/libext4_utils.mk
 include rules/liblog.mk
+include rules/libmdnssd.mk
 include rules/libpcre.mk
 include rules/libselinux.mk
 include rules/libsparse.mk

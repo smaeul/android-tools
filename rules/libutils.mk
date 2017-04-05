@@ -20,6 +20,7 @@ LIBUTILS_SRC_FILES := \
     SharedBuffer.cpp \
     Static.cpp \
     StopWatch.cpp \
+    StrongPointer.cpp \
     SystemClock.cpp \
     Timers.cpp \
     Tokenizer.cpp \

@@ -6,6 +6,7 @@ LIBCUTILS_ARCHIVE := obj/libcutils/libcutils.a
 LIBCUTILS_CFLAGS := \
     -include uchar.h \
     -I$(srcdir)/core/include \
+    -I$(srcdir)/core/libcutils/include \
     -I$(srcdir)/include \
 
 LIBCUTILS_CXXFLAGS := \

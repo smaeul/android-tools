@@ -27,6 +27,7 @@ LIBADB_CXXFLAGS := \
     -fvisibility=hidden \
     -I$(srcdir)/core/adb \
     -I$(srcdir)/libusb/include \
+    -I$(srcdir)/mdnsresponder/mDNSShared \
 
 LIBADB_SRC_FILES := \
     adb.cpp \
@@ -45,6 +46,7 @@ LIBADB_SRC_FILES := \
     sysdeps_unix.cpp \
     transport.cpp \
     transport_local.cpp \
+    transport_mdns.cpp \
     transport_usb.cpp \
 
 LIBADB_OBJ_FILES := \
@@ -102,6 +104,7 @@ ADB_LIBS := \
     libcrypto_utils \
     libcutils \
     libdiagnose_usb \
+    libmdnssd \
     libusb \
 
 ADB_SRC_FILES := \
