@@ -11,8 +11,6 @@ LIBLOG_CFLAGS := \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/liblog/include \
     -I$(srcdir)/include \
-    -std=gnu11 \
-    -Werror \
 
 LIBLOG_CXXFLAGS := \
     -DFAKE_LOG_DEVICE=1 \
@@ -22,8 +20,6 @@ LIBLOG_CXXFLAGS := \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/liblog/include \
     -I$(srcdir)/include \
-    -std=gnu++14 \
-    -Wall -Werror \
 
 LIBLOG_SRC_FILES := \
     config_read.c \

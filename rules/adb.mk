@@ -13,10 +13,7 @@ ADB_COMMON_CXXFLAGS := \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/libcrypto_utils/include \
     -I$(srcdir)/include \
-    -std=gnu++14 \
-    -Wall -Wextra -Werror \
     -Wexit-time-destructors \
-    -Wno-unused-parameter \
     -Wno-missing-field-initializers \
     -Wvla \
 

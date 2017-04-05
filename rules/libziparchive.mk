@@ -10,8 +10,6 @@ LIBZIPARCHIVE_CXXFLAGS := \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/libziparchive/include \
     -I$(srcdir)/include \
-    -std=gnu++14 \
-    -Wall -Werror \
     -Wold-style-cast \
     -Wno-logical-not-parentheses \
     -Wno-missing-field-initializers \

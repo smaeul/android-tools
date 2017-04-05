@@ -7,7 +7,6 @@ LIBPCRE_CFLAGS := \
     -DHAVE_CONFIG_H \
     -I$(srcdir)/pcre/include \
     -I$(srcdir)/pcre/include_internal \
-    -std=gnu11 \
 
 LIBPCRE_SRC_FILES := \
     dist2/src/pcre2_auto_possess.c \

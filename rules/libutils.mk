@@ -7,9 +7,6 @@ LIBUTILS_CXXFLAGS := \
     -DLIBUTILS_NATIVE=1 \
     -fvisibility=protected \
     -I$(srcdir)/core/include \
-    -std=gnu++14 \
-    -Werror \
-    #-I$(srcdir)/include \
 
 LIBUTILS_SRC_FILES := \
     CallStack.cpp \

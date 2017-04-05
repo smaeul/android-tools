@@ -7,14 +7,10 @@ LIBCUTILS_CFLAGS := \
     -include uchar.h \
     -I$(srcdir)/core/include \
     -I$(srcdir)/include \
-    -std=gnu11 \
-    -Wall -Wextra -Werror \
 
 LIBCUTILS_CXXFLAGS := \
     -I$(srcdir)/core/include \
     -I$(srcdir)/include \
-    -std=gnu++14 \
-    -Wall -Wextra -Werror \
     -Wexit-time-destructors \
 
 LIBCUTILS_SRC_FILES := \

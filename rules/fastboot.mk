@@ -18,8 +18,6 @@ FASTBOOT_CXXFLAGS := \
     -I$(srcdir)/extras/ext4_utils/include \
     -I$(srcdir)/extras/f2fs_utils \
     -I$(srcdir)/include \
-    -std=gnu++14 \
-    -Wall -Wextra -Werror -Wunreachable-code \
 
 FASTBOOT_LDFLAGS := \
     -lz \

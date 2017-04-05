@@ -9,8 +9,6 @@ LIBEXT4_UTILS_CFLAGS := \
     -I$(srcdir)/extras/ext4_utils/include \
     -I$(srcdir)/include \
     -I$(srcdir)/selinux/libselinux/include \
-    -std=gnu11 \
-    -Werror \
 
 LIBEXT4_UTILS_SRC_FILES := \
     allocate.c \

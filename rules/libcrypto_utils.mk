@@ -6,8 +6,6 @@ LIBCRYPTO_UTILS_ARCHIVE := obj/libcrypto_utils/libcrypto_utils.a
 LIBCRYPTO_UTILS_CFLAGS := \
     -I$(srcdir)/boringssl/include \
     -I$(srcdir)/core/libcrypto_utils/include \
-    -std=gnu11 \
-    -Wall -Wextra -Werror \
 
 LIBCRYPTO_UTILS_SRC_FILES := \
     android_pubkey.c \

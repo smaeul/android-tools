@@ -5,8 +5,6 @@ LIBSPARSE_ARCHIVE := obj/libsparse/libsparse.a
 
 LIBSPARSE_CFLAGS := \
     -I$(srcdir)/core/libsparse/include \
-    -std=gnu11 \
-    -Werror \
 
 LIBSPARSE_SRC_FILES := \
     backed_block.c \
@@ -42,8 +40,6 @@ SIMG2IMG_BINARY := obj/simg2img/simg2img
 
 SIMG2IMG_CFLAGS := \
     -I$(srcdir)/core/libsparse/include \
-    -std=gnu11 \
-    -Werror \
 
 SIMG2IMG_LDFLAGS := \
     -lz \
@@ -79,8 +75,6 @@ IMG2SIMG_BINARY := obj/img2simg/img2simg
 
 IMG2SIMG_CFLAGS := \
     -I$(srcdir)/core/libsparse/include \
-    -std=gnu11 \
-    -Werror \
 
 IMG2SIMG_LDFLAGS := \
     -lz \

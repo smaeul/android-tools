@@ -17,7 +17,6 @@ LIBSELINUX_CFLAGS := \
     -I$(srcdir)/pcre/include \
     -I$(srcdir)/selinux/libselinux/include \
     -I$(srcdir)/selinux/libsepol/include \
-    -std=gnu11 \
     -Wno-pointer-bool-conversion
 
 LIBSELINUX_SRC_FILES := \

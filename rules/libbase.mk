@@ -9,8 +9,6 @@ LIBBASE_CXXFLAGS := \
     -I$(srcdir)/boringssl/include \
     -I$(srcdir)/core/base/include \
     -I$(srcdir)/core/include \
-    -std=gnu++14 \
-    -Wall -Wextra -Werror \
     -Wexit-time-destructors \
 
 LIBBASE_SRC_FILES := \

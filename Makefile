@@ -1,10 +1,29 @@
 srcdir := $(PWD)
 
-CC := clang
-CFLAGS := -Os -pipe
-CXX := clang++
-CXXFLAGS := -Os -pipe
-LDFLAGS := -static
+CC = clang
+CFLAGS = -g0 -Os
+CFLAGS += \
+    -std=gnu11 \
+    -Wall \
+    -Wextra \
+    -Werror=implicit-function-declaration \
+    -Werror=implicit-int \
+    -Wno-unused-parameter
+CXX = clang++
+CXXFLAGS = -g0 -Os
+CXXFLAGS += \
+    -std=gnu++14 \
+    -Wall \
+    -Wextra \
+    -Werror=implicit-function-declaration \
+    -Werror=implicit-int \
+    -Wno-unused-parameter
+LDFLAGS = -s -static -Wl,--hash-style=both
+LDFLAGS += \
+    -Wl,--no-undefined \
+    -Wl,-z,noexecstack \
+    -Wl,-z,now \
+    -Wl,-z,relro
 
 all:
 

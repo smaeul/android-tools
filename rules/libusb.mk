@@ -8,8 +8,6 @@ LIBUSB_CFLAGS := \
     -I$(srcdir)/libusb/libusb \
     -I$(srcdir)/libusb/libusb/os \
     -I$(srcdir)/libusb/linux \
-    -std=gnu11 \
-    -Werror \
 
 LIBUSB_SRC_FILES := \
     core.c \
