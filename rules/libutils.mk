@@ -24,13 +24,6 @@ LIBUTILS_SRC_FILES := \
     Timers.cpp \
     Tokenizer.cpp \
     Unicode.cpp \
-    #Looper.cpp \
-    NativeHandle.cpp \
-    RefBase.cpp \
-    String8.cpp \
-    String16.cpp \
-    Threads.cpp \
-    VectorImpl.cpp \
 
 LIBUTILS_C_OBJ_FILES := \
     $(patsubst %.c,obj/libutils/%.o,$(filter %.c,$(LIBUTILS_SRC_FILES)))
