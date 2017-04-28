@@ -4,6 +4,11 @@
 LIBSPARSE_ARCHIVE := obj/libsparse/libsparse.a
 
 LIBSPARSE_CFLAGS := \
+    -I$(srcdir)/core/base/include \
+    -I$(srcdir)/core/libsparse/include \
+
+LIBSPARSE_CXXFLAGS := \
+    -I$(srcdir)/core/base/include \
     -I$(srcdir)/core/libsparse/include \
 
 LIBSPARSE_SRC_FILES := \
@@ -12,7 +17,7 @@ LIBSPARSE_SRC_FILES := \
     sparse.c \
     sparse_crc32.c \
     sparse_err.c \
-    sparse_read.c \
+    sparse_read.cpp \
 
 LIBSPARSE_C_OBJ_FILES := \
     $(patsubst %.c,obj/libsparse/%.o,$(filter %.c,$(LIBSPARSE_SRC_FILES)))
@@ -46,6 +51,7 @@ SIMG2IMG_LDFLAGS := \
 
 SIMG2IMG_LIBS := \
     libsparse \
+    libbase \
 
 SIMG2IMG_SRC_FILES := \
     simg2img.c \
@@ -63,7 +69,7 @@ DIRS += $(dir $(SIMG2IMG_OBJ_FILES))
 simg2img: $(SIMG2IMG_BINARY)
 
 $(SIMG2IMG_BINARY): $(SIMG2IMG_OBJ_FILES) $(SIMG2IMG_LIB_DEPS) | dirs
-	$(CC) $(SIMG2IMG_CFLAGS) $(CFLAGS) -o $@ $^ $(SIMG2IMG_LDFLAGS) $(LDFLAGS)
+	$(CXX) $(SIMG2IMG_CFLAGS) $(CFLAGS) -o $@ $^ $(SIMG2IMG_LDFLAGS) $(LDFLAGS)
 
 $(SIMG2IMG_OBJ_FILES): obj/simg2img/%.o: $(srcdir)/core/libsparse/%.c | dirs
 	$(CC) $(SIMG2IMG_CFLAGS) $(CFLAGS) -c -o $@ $^
@@ -81,6 +87,7 @@ IMG2SIMG_LDFLAGS := \
 
 IMG2SIMG_LIBS := \
     libsparse \
+    libbase \
 
 IMG2SIMG_SRC_FILES := \
     img2simg.c \
@@ -98,7 +105,7 @@ DIRS += $(dir $(IMG2SIMG_OBJ_FILES))
 img2simg: $(IMG2SIMG_BINARY)
 
 $(IMG2SIMG_BINARY): $(IMG2SIMG_OBJ_FILES) $(IMG2SIMG_LIB_DEPS) | dirs
-	$(CC) $(IMG2SIMG_CFLAGS) $(CFLAGS) -o $@ $^ $(IMG2SIMG_LDFLAGS) $(LDFLAGS)
+	$(CXX) $(IMG2SIMG_CFLAGS) $(CFLAGS) -o $@ $^ $(IMG2SIMG_LDFLAGS) $(LDFLAGS)
 
 $(IMG2SIMG_OBJ_FILES): obj/img2simg/%.o: $(srcdir)/core/libsparse/%.c | dirs
 	$(CC) $(IMG2SIMG_CFLAGS) $(CFLAGS) -c -o $@ $^

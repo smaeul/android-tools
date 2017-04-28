@@ -43,6 +43,7 @@ LIBADB_SRC_FILES := \
     sockets.cpp \
     socket_spec.cpp \
     sysdeps/errno.cpp \
+    sysdeps/posix/network.cpp \
     sysdeps_unix.cpp \
     transport.cpp \
     transport_local.cpp \

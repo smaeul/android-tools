@@ -34,7 +34,6 @@ LIBCUTILS_SRC_FILES := \
     socket_inaddr_any_server_unix.c \
     socket_local_client_unix.c \
     socket_local_server_unix.c \
-    socket_loopback_server_unix.c \
     socket_network_client_unix.c \
     sockets_unix.cpp \
     str_parms.c \
