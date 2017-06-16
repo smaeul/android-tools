@@ -11,6 +11,7 @@ LIBCUTILS_CFLAGS := \
 
 LIBCUTILS_CXXFLAGS := \
     -I$(srcdir)/core/include \
+    -I$(srcdir)/core/libcutils/include \
     -I$(srcdir)/include \
     -Wexit-time-destructors \
 
@@ -19,7 +20,7 @@ LIBCUTILS_SRC_FILES := \
     ashmem-host.c \
     config_utils.c \
     fs.c \
-    fs_config.c \
+    fs_config.cpp \
     canned_fs_config.c \
     dlmalloc_stubs.c \
     hashmap.c \

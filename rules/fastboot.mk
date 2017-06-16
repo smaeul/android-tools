@@ -6,7 +6,7 @@ fastboot_version := $(shell git submodule status core | cut -c2-9)-android
 FASTBOOT_BINARY := obj/fastboot/fastboot
 
 FASTBOOT_CXXFLAGS := \
-    -DFASTBOOT_REVISION='"$(fastboot_version)"' \
+    -DFASTBOOT_VERSION='"$(fastboot_version)"' \
     -include sys/select.h \
     -I$(srcdir)/boringssl/third_party/googletest/include \
     -I$(srcdir)/core/base/include \

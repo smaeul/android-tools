@@ -7,7 +7,7 @@ adb_version := $(shell git submodule status core | cut -c2-9)-android
 
 ADB_COMMON_CXXFLAGS := \
     -DADB_HOST=1 \
-    -DADB_REVISION='"$(adb_version)"' \
+    -DADB_VERSION='"$(adb_version)"' \
     -I$(srcdir)/boringssl/include \
     -I$(srcdir)/core/base/include \
     -I$(srcdir)/core/include \
