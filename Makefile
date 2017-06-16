@@ -47,6 +47,8 @@ include rules/libusb.mk
 include rules/libutils.mk
 include rules/libziparchive.mk
 
+BINS += core/mkbootimg/mkbootimg
+
 BINS := $(sort $(BINS))
 DIRS := $(sort $(DIRS))
 
