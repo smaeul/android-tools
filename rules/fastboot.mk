@@ -58,7 +58,7 @@ DIRS += $(dir $(FASTBOOT_OBJ_FILES))
 fastboot: $(FASTBOOT_BINARY)
 
 $(FASTBOOT_BINARY): $(FASTBOOT_OBJ_FILES) $(FASTBOOT_LIB_DEPS) | dirs
-	$(CXX) $(FASTBOOT_CXXFLAGS) $(CXXFLAGS) -o $@ $^ $(FASTBOOT_LDFLAGS) $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(FASTBOOT_CXXFLAGS) -o $@ $^ $(LDFLAGS) $(FASTBOOT_LDFLAGS)
 
 $(FASTBOOT_OBJ_FILES): obj/fastboot/%.o: $(srcdir)/core/fastboot/%.cpp | dirs
-	$(CXX) $(FASTBOOT_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(FASTBOOT_CXXFLAGS) -c -o $@ $^

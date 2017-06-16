@@ -30,4 +30,4 @@ $(LIBZIPARCHIVE_ARCHIVE): $(LIBZIPARCHIVE_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBZIPARCHIVE_CXX_OBJ_FILES): obj/libziparchive/%.o: $(srcdir)/core/libziparchive/%.cc | dirs
-	$(CXX) $(LIBZIPARCHIVE_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBZIPARCHIVE_CXXFLAGS) -c -o $@ $^

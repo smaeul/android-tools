@@ -37,7 +37,7 @@ $(LIBEXT4_UTILS_ARCHIVE): $(LIBEXT4_UTILS_C_OBJ_FILES) $(LIBEXT4_UTILS_CXX_OBJ_F
 	$(AR) rcs $@ $^
 
 $(LIBEXT4_UTILS_C_OBJ_FILES): obj/libext4_utils/%.o: $(srcdir)/extras/ext4_utils/%.c | dirs
-	$(CC) $(LIBEXT4_UTILS_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBEXT4_UTILS_CFLAGS) -c -o $@ $^
 
 $(LIBEXT4_UTILS_CXX_OBJ_FILES): obj/libext4_utils/%.o: $(srcdir)/extras/ext4_utils/%.cpp | dirs
-	$(CXX) $(LIBEXT4_UTILS_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBEXT4_UTILS_CXXFLAGS) -c -o $@ $^

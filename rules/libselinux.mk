@@ -64,7 +64,7 @@ $(LIBSELINUX_ARCHIVE): $(LIBSELINUX_C_OBJ_FILES) $(LIBSELINUX_CXX_OBJ_FILES) | d
 	$(AR) rcs $@ $^
 
 $(LIBSELINUX_C_OBJ_FILES): obj/libselinux/%.o: $(srcdir)/selinux/libselinux/%.c | dirs
-	$(CC) $(LIBSELINUX_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBSELINUX_CFLAGS) -c -o $@ $^
 
 $(LIBSELINUX_CXX_OBJ_FILES): obj/libselinux/%.o: $(srcdir)/selinux/libselinux/%.cpp | dirs
-	$(CXX) $(LIBSELINUX_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBSELINUX_CXXFLAGS) -c -o $@ $^

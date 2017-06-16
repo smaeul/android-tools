@@ -33,4 +33,4 @@ $(LIBBASE_ARCHIVE): $(LIBBASE_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBBASE_OBJ_FILES): obj/libbase/%.o: $(srcdir)/core/base/%.cpp | dirs
-	$(CXX) $(LIBBASE_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBBASE_CXXFLAGS) -c -o $@ $^

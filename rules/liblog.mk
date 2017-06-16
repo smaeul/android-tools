@@ -51,7 +51,7 @@ $(LIBLOG_ARCHIVE): $(LIBLOG_C_OBJ_FILES) $(LIBLOG_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBLOG_C_OBJ_FILES): obj/liblog/%.o: $(srcdir)/core/liblog/%.c | dirs
-	$(CC) $(LIBLOG_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBLOG_CFLAGS) -c -o $@ $^
 
 $(LIBLOG_CXX_OBJ_FILES): obj/liblog/%.o: $(srcdir)/core/liblog/%.cpp | dirs
-	$(CXX) $(LIBLOG_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBLOG_CXXFLAGS) -c -o $@ $^

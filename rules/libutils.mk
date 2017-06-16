@@ -40,7 +40,7 @@ $(LIBUTILS_ARCHIVE): $(LIBUTILS_C_OBJ_FILES) $(LIBUTILS_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBUTILS_C_OBJ_FILES): obj/libutils/%.o: $(srcdir)/core/libutils/%.c | dirs
-	$(CC) $(LIBUTILS_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBUTILS_CFLAGS) -c -o $@ $^
 
 $(LIBUTILS_CXX_OBJ_FILES): obj/libutils/%.o: $(srcdir)/core/libutils/%.cpp | dirs
-	$(CXX) $(LIBUTILS_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBUTILS_CXXFLAGS) -c -o $@ $^

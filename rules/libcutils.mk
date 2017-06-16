@@ -57,7 +57,7 @@ $(LIBCUTILS_ARCHIVE): $(LIBCUTILS_C_OBJ_FILES) $(LIBCUTILS_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBCUTILS_C_OBJ_FILES): obj/libcutils/%.o: $(srcdir)/core/libcutils/%.c | dirs
-	$(CC) $(LIBCUTILS_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBCUTILS_CFLAGS) -c -o $@ $^
 
 $(LIBCUTILS_CXX_OBJ_FILES): obj/libcutils/%.o: $(srcdir)/core/libcutils/%.cpp | dirs
-	$(CXX) $(LIBCUTILS_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBCUTILS_CXXFLAGS) -c -o $@ $^

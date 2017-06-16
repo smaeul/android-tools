@@ -35,7 +35,7 @@ $(LIBUSB_ARCHIVE): $(LIBUSB_C_OBJ_FILES) $(LIBUSB_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBUSB_C_OBJ_FILES): obj/libusb/%.o: $(srcdir)/libusb/libusb/%.c | dirs
-	$(CC) $(LIBUSB_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBUSB_CFLAGS) -c -o $@ $^
 
 $(LIBUSB_CXX_OBJ_FILES): obj/libusb/%.o: $(srcdir)/libusb/libusb/%.cpp | dirs
-	$(CXX) $(LIBUSB_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBUSB_CXXFLAGS) -c -o $@ $^

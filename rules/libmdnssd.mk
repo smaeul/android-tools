@@ -32,7 +32,7 @@ $(LIBMDNSSD_ARCHIVE): $(LIBMDNSSD_C_OBJ_FILES) $(LIBMDNSSD_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBMDNSSD_C_OBJ_FILES): obj/libmdnssd/%.o: $(srcdir)/mdnsresponder/%.c | dirs
-	$(CC) $(LIBMDNSSD_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBMDNSSD_CFLAGS) -c -o $@ $^
 
 $(LIBMDNSSD_CXX_OBJ_FILES): obj/libmdnssd/%.o: $(srcdir)/mdnsresponder/%.cpp | dirs
-	$(CXX) $(LIBMDNSSD_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBMDNSSD_CXXFLAGS) -c -o $@ $^

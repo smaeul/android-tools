@@ -24,7 +24,7 @@ $(LIBCRYPTO_UTILS_ARCHIVE): $(LIBCRYPTO_UTILS_C_OBJ_FILES) $(LIBCRYPTO_UTILS_CXX
 	$(AR) rcs $@ $^
 
 $(LIBCRYPTO_UTILS_C_OBJ_FILES): obj/libcrypto_utils/%.o: $(srcdir)/core/libcrypto_utils/%.c | dirs
-	$(CC) $(LIBCRYPTO_UTILS_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBCRYPTO_UTILS_CFLAGS) -c -o $@ $^
 
 $(LIBCRYPTO_UTILS_CXX_OBJ_FILES): obj/libcrypto_utils/%.o: $(srcdir)/core/libcrypto_utils/%.cpp | dirs
-	$(CXX) $(LIBCRYPTO_UTILS_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBCRYPTO_UTILS_CXXFLAGS) -c -o $@ $^

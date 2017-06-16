@@ -48,7 +48,7 @@ $(LIBPCRE_ARCHIVE): $(LIBPCRE_C_OBJ_FILES) $(LIBPCRE_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBPCRE_C_OBJ_FILES): obj/libpcre/%.o: $(srcdir)/pcre/%.c | dirs
-	$(CC) $(LIBPCRE_CFLAGS) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(LIBPCRE_CFLAGS) -c -o $@ $^
 
 $(LIBPCRE_CXX_OBJ_FILES): obj/libpcre/%.o: $(srcdir)/pcre/%.cpp | dirs
-	$(CXX) $(LIBPCRE_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBPCRE_CXXFLAGS) -c -o $@ $^

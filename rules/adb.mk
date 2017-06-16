@@ -61,7 +61,7 @@ $(LIBADB_ARCHIVE): $(LIBADB_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBADB_OBJ_FILES): obj/libadb/%.o: $(srcdir)/core/adb/%.cpp | dirs
-	$(CXX) $(LIBADB_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBADB_CXXFLAGS) -c -o $@ $^
 
 # libdiagnose_usb
 # =========================================================
@@ -86,7 +86,7 @@ $(LIBDIAGNOSE_USB_ARCHIVE): $(LIBDIAGNOSE_USB_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
 $(LIBDIAGNOSE_USB_OBJ_FILES): obj/libdiagnose_usb/%.o: $(srcdir)/core/adb/%.cpp | dirs
-	$(CXX) $(LIBDIAGNOSE_USB_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LIBDIAGNOSE_USB_CXXFLAGS) -c -o $@ $^
 
 # adb host tool
 # =========================================================
@@ -131,7 +131,7 @@ DIRS += $(dir $(ADB_OBJ_FILES))
 adb: $(ADB_BINARY)
 
 $(ADB_BINARY): $(ADB_OBJ_FILES) $(ADB_LIB_DEPS) | dirs
-	$(CXX) $(ADB_CXXFLAGS) $(CXXFLAGS) -o $@ $^ $(ADB_LDFLAGS) $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(ADB_CXXFLAGS) -o $@ $^ $(LDFLAGS) $(ADB_LDFLAGS)
 
 $(ADB_OBJ_FILES): obj/adb/%.o: $(srcdir)/core/adb/%.cpp | dirs
-	$(CXX) $(ADB_CXXFLAGS) $(CXXFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) $(ADB_CXXFLAGS) -c -o $@ $^
