@@ -8,6 +8,7 @@ LIBUSB_CFLAGS := \
     -I$(srcdir)/libusb/libusb \
     -I$(srcdir)/libusb/libusb/os \
     -I$(srcdir)/libusb/linux \
+    -Wno-sign-compare
 
 LIBUSB_SRC_FILES := \
     core.c \

@@ -5,19 +5,24 @@ CFLAGS ?= -g0 -Os
 CFLAGS += \
     -std=gnu11 \
     -Wall \
+    -Werror\
     -Wextra \
-    -Werror=implicit-function-declaration \
-    -Werror=implicit-int \
-    -Wno-unused-parameter
+    -Wno-unused-function \
+    -Wno-unused-parameter \
+    -Wno-unused-variable \
+    -Wno-\#warnings
 CXX = clang++
 CXXFLAGS ?= -g0 -Os
 CXXFLAGS += \
     -std=gnu++14 \
     -Wall \
+    -Werror \
     -Wextra \
-    -Werror=implicit-function-declaration \
-    -Werror=implicit-int \
-    -Wno-unused-parameter
+    -Wno-unused-function \
+    -Wno-unused-parameter \
+    -Wno-unused-private-field \
+    -Wno-unused-variable \
+    -Wno-\#warnings
 LDFLAGS ?= -s -static -Wl,--hash-style=both
 LDFLAGS += \
     -Wl,--no-undefined \
