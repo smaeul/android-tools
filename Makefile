@@ -57,6 +57,7 @@ $(DIRS):
 	mkdir -p $@
 
 install: $(BINS)
-	install -Dm0755 $(BINS) $(DESTDIR)$(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	install -m0755 $(BINS) $(DESTDIR)$(PREFIX)/bin
 
 .PHONY: all clean dirs install
