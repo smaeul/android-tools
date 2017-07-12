@@ -14,6 +14,7 @@ FASTBOOT_CXXFLAGS := \
     -I$(srcdir)/core/fastboot \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/libsparse/include \
+    -I$(srcdir)/core/libziparchive/include \
     -I$(srcdir)/core/mkbootimg \
     -I$(srcdir)/extras/ext4_utils/include \
     -I$(srcdir)/extras/f2fs_utils \
