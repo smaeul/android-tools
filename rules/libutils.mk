@@ -7,13 +7,12 @@ LIBUTILS_CXXFLAGS := \
     -DLIBUTILS_NATIVE=1 \
     -fvisibility=protected \
     -I$(srcdir)/core/include \
+    -include limits.h \
 
 LIBUTILS_SRC_FILES := \
     CallStack.cpp \
     FileMap.cpp \
     JenkinsHash.cpp \
-    LinearTransform.cpp \
-    Log.cpp \
     Printer.cpp \
     ProcessCallStack.cpp \
     PropertyMap.cpp \
