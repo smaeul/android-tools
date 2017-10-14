@@ -7,6 +7,7 @@ LIBUTILS_CXXFLAGS := \
     -DLIBUTILS_NATIVE=1 \
     -fvisibility=protected \
     -I$(srcdir)/core/include \
+    -I$(srcdir)/include \
     -include limits.h \
 
 LIBUTILS_SRC_FILES := \
