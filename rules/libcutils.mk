@@ -17,32 +17,31 @@ LIBCUTILS_CXXFLAGS := \
 
 LIBCUTILS_SRC_FILES := \
     android_get_control_file.cpp \
-    ashmem-host.c \
-    config_utils.c \
-    fs.c \
+    ashmem-host.cpp \
+    config_utils.cpp \
+    fs.cpp \
     fs_config.cpp \
-    canned_fs_config.c \
-    dlmalloc_stubs.c \
-    hashmap.c \
-    iosched_policy.c \
-    load_file.c \
-    multiuser.c \
-    native_handle.c \
+    canned_fs_config.cpp \
+    hashmap.cpp \
+    iosched_policy.cpp \
+    load_file.cpp \
+    multiuser.cpp \
+    native_handle.cpp \
     open_memstream.c \
-    record_stream.c \
+    record_stream.cpp \
     sched_policy.cpp \
     sockets.cpp \
-    socket_inaddr_any_server_unix.c \
-    socket_local_client_unix.c \
-    socket_local_server_unix.c \
-    socket_network_client_unix.c \
+    socket_inaddr_any_server_unix.cpp \
+    socket_local_client_unix.cpp \
+    socket_local_server_unix.cpp \
+    socket_network_client_unix.cpp \
     sockets_unix.cpp \
-    str_parms.c \
-    strdup16to8.c \
-    strdup8to16.c \
+    str_parms.cpp \
+    strdup16to8.cpp \
+    strdup8to16.cpp \
     strlcpy.c \
-    threads.c \
-    trace-host.c \
+    threads.cpp \
+    trace-host.cpp \
 
 LIBCUTILS_C_OBJ_FILES := \
     $(patsubst %.c,obj/libcutils/%.o,$(filter %.c,$(LIBCUTILS_SRC_FILES)))
