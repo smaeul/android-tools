@@ -11,20 +11,21 @@ LIBUTILS_CXXFLAGS := \
     -include limits.h \
 
 LIBUTILS_SRC_FILES := \
-    CallStack.cpp \
     FileMap.cpp \
     JenkinsHash.cpp \
+    NativeHandle.cpp \
     Printer.cpp \
-    ProcessCallStack.cpp \
     PropertyMap.cpp \
+    RefBase.cpp \
     SharedBuffer.cpp \
-    Static.cpp \
     StopWatch.cpp \
     StrongPointer.cpp \
     SystemClock.cpp \
+    Threads.cpp \
     Timers.cpp \
     Tokenizer.cpp \
     Unicode.cpp \
+    misc.cpp \
 
 LIBUTILS_C_OBJ_FILES := \
     $(patsubst %.c,obj/libutils/%.o,$(filter %.c,$(LIBUTILS_SRC_FILES)))

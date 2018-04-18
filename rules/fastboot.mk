@@ -10,12 +10,12 @@ FASTBOOT_CXXFLAGS := \
     -include sys/select.h \
     -I$(srcdir)/boringssl/third_party/googletest/include \
     -I$(srcdir)/core/base/include \
-    -I$(srcdir)/core/adb \
+    -I$(srcdir)/core/diagnose_usb/include \
     -I$(srcdir)/core/fastboot \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/libsparse/include \
     -I$(srcdir)/core/libziparchive/include \
-    -I$(srcdir)/core/mkbootimg \
+    -I$(srcdir)/core/mkbootimg/include/bootimg \
     -I$(srcdir)/extras/ext4_utils/include \
     -I$(srcdir)/extras/f2fs_utils \
     -I$(srcdir)/include \
@@ -39,7 +39,8 @@ FASTBOOT_SRC_FILES := \
     bootimg_utils.cpp \
     engine.cpp \
     fastboot.cpp \
-    fs.cpp\
+    fs.cpp \
+    main.cpp \
     protocol.cpp \
     socket.cpp \
     tcp.cpp \

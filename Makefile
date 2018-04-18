@@ -37,6 +37,7 @@ include rules/fastboot.mk
 include rules/libbase.mk
 include rules/libcrypto_utils.mk
 include rules/libcutils.mk
+include rules/libdiagnose_usb.mk
 include rules/libext4_utils.mk
 include rules/liblog.mk
 include rules/libmdnssd.mk
@@ -48,6 +49,7 @@ include rules/libutils.mk
 include rules/libziparchive.mk
 
 BINS += core/mkbootimg/mkbootimg
+BINS += core/mkbootimg/unpack_bootimg
 
 BINS := $(sort $(BINS))
 DIRS := $(sort $(DIRS))

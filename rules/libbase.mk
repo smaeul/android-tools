@@ -21,6 +21,7 @@ LIBBASE_SRC_FILES := \
     stringprintf.cpp \
     strings.cpp \
     test_utils.cpp \
+    threads.cpp \
 
 LIBBASE_OBJ_FILES := \
     $(patsubst %.cpp,obj/libbase/%.o,$(LIBBASE_SRC_FILES))

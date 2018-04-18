@@ -10,11 +10,15 @@ ADB_COMMON_CXXFLAGS := \
     -DADB_VERSION='"$(adb_version)"' \
     -I$(srcdir)/boringssl/include \
     -I$(srcdir)/core/base/include \
+    -I$(srcdir)/core/diagnose_usb/include \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/libcrypto_utils/include \
     -I$(srcdir)/include \
+    -Iobj/include \
     -Wexit-time-destructors \
     -Wno-missing-field-initializers \
+    -Wno-unused-parameter \
+    -Wthread-safety \
     -Wvla \
 
 # libadb
@@ -31,15 +35,17 @@ LIBADB_CXXFLAGS := \
 
 LIBADB_SRC_FILES := \
     adb.cpp \
-    adb_auth_host.cpp \
     adb_io.cpp \
     adb_listeners.cpp \
     adb_trace.cpp \
     adb_utils.cpp \
+    client/auth.cpp \
+    client/transport_mdns.cpp \
     client/usb_dispatch.cpp \
     client/usb_libusb.cpp \
     client/usb_linux.cpp \
     fdevent.cpp \
+    services.cpp \
     sockets.cpp \
     socket_spec.cpp \
     sysdeps/errno.cpp \
@@ -47,7 +53,6 @@ LIBADB_SRC_FILES := \
     sysdeps_unix.cpp \
     transport.cpp \
     transport_local.cpp \
-    transport_mdns.cpp \
     transport_usb.cpp \
 
 LIBADB_OBJ_FILES := \
@@ -62,31 +67,6 @@ $(LIBADB_ARCHIVE): $(LIBADB_OBJ_FILES) | dirs
 
 $(LIBADB_OBJ_FILES): obj/libadb/%.o: $(srcdir)/core/adb/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(LIBADB_CXXFLAGS) -c -o $@ $^
-
-# libdiagnose_usb
-# =========================================================
-
-LIBDIAGNOSE_USB_ARCHIVE := obj/libdiagnose_usb/libdiagnose_usb.a
-
-LIBDIAGNOSE_USB_CXXFLAGS := \
-    $(ADB_COMMON_CXXFLAGS) \
-    -fvisibility=hidden \
-
-LIBDIAGNOSE_USB_SRC_FILES := \
-    diagnose_usb.cpp \
-
-LIBDIAGNOSE_USB_OBJ_FILES := \
-    $(patsubst %.cpp,obj/libdiagnose_usb/%.o,$(LIBDIAGNOSE_USB_SRC_FILES))
-
-DIRS += $(dir $(LIBDIAGNOSE_USB_OBJ_FILES))
-
-libdiagnose_usb: $(LIBDIAGNOSE_USB_ARCHIVE)
-
-$(LIBDIAGNOSE_USB_ARCHIVE): $(LIBDIAGNOSE_USB_OBJ_FILES) | dirs
-	$(AR) rcs $@ $^
-
-$(LIBDIAGNOSE_USB_OBJ_FILES): obj/libdiagnose_usb/%.o: $(srcdir)/core/adb/%.cpp | dirs
-	$(CXX) $(CXXFLAGS) $(LIBDIAGNOSE_USB_CXXFLAGS) -c -o $@ $^
 
 # adb host tool
 # =========================================================
@@ -105,18 +85,18 @@ ADB_LIBS := \
     libcrypto_utils \
     libcutils \
     libdiagnose_usb \
+    liblog \
     libmdnssd \
     libusb \
 
 ADB_SRC_FILES := \
-    adb_client.cpp \
-    bugreport.cpp \
+    client/adb_client.cpp \
+    client/bugreport.cpp \
+    client/commandline.cpp \
+    client/console.cpp \
+    client/file_sync_client.cpp \
+    client/line_printer.cpp \
     client/main.cpp \
-    console.cpp \
-    commandline.cpp \
-    file_sync_client.cpp \
-    line_printer.cpp \
-    services.cpp \
     shell_service_protocol.cpp \
 
 ADB_LIB_DEPS := \
