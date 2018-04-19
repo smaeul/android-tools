@@ -8,7 +8,7 @@ obj/libcrypto/libcrypto.a: | dirs
 		cmake $(srcdir)/boringssl \
 		-DCMAKE_C_COMPILER="$(CC)" \
 		-DCMAKE_C_FLAGS="$(CFLAGS)" \
-		-DCMAKE_CXX_COMPILER="$(CXX)" \
+		-DCMAKE_CXX_COMPILER="$(firstword $(CXX))" \
 		-DCMAKE_CXX_FLAGS="$(CXXFLAGS)" \
 		-DCMAKE_RULE_MESSAGES=0 \
 		-DCMAKE_VERBOSE_MAKEFILE=1)

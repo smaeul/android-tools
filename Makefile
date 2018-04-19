@@ -9,7 +9,7 @@ CFLAGS += \
     -Werror=implicit-function-declaration \
     -Werror=implicit-int \
     -Wno-unused-parameter
-CXX = clang++
+CXX = clang++ -stdlib=libc++
 CXXFLAGS ?= -g0 -Os
 CXXFLAGS += \
     -std=gnu++14 \
