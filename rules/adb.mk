@@ -38,6 +38,7 @@ LIBADB_SRC_FILES := \
     adb_io.cpp \
     adb_listeners.cpp \
     adb_trace.cpp \
+    adb_unique_fd.cpp \
     adb_utils.cpp \
     client/auth.cpp \
     client/transport_mdns.cpp \
@@ -52,6 +53,7 @@ LIBADB_SRC_FILES := \
     sysdeps/posix/network.cpp \
     sysdeps_unix.cpp \
     transport.cpp \
+    transport_fd.cpp \
     transport_local.cpp \
     transport_usb.cpp \
 

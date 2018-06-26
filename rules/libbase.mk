@@ -9,6 +9,7 @@ LIBBASE_CXXFLAGS := \
     -I$(srcdir)/boringssl/include \
     -I$(srcdir)/core/base/include \
     -I$(srcdir)/core/include \
+    -I$(srcdir)/include \
     -Wexit-time-destructors \
 
 LIBBASE_SRC_FILES := \
@@ -17,6 +18,7 @@ LIBBASE_SRC_FILES := \
     file.cpp \
     logging.cpp \
     parsenetaddress.cpp \
+    properties.cpp \
     quick_exit.cpp \
     stringprintf.cpp \
     strings.cpp \

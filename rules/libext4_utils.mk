@@ -14,12 +14,10 @@ LIBEXT4_UTILS_SRC_FILES := \
     allocate.c \
     contents.c \
     crc16.c \
-    ext4fixup.c \
     ext4_sb.c \
     ext4_utils.c \
     extent.c \
     indirect.c \
-    make_ext4fs.c \
     sha1.c \
     wipe.c \
 
