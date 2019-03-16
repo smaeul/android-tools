@@ -5,6 +5,7 @@ LIBBASE_ARCHIVE := obj/libbase/libbase.a
 
 LIBBASE_CXXFLAGS := \
     -DDEFFILEMODE=0666 \
+    -D'PAGE_SIZE=getpagesize()' \
     -D'getprogname()=program_invocation_short_name' \
     -I$(srcdir)/include \
     $(shell pkg-config --cflags libcrypto) \
