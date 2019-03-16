@@ -31,6 +31,9 @@ all:
 clean:
 	rm -fr obj
 
+obj/%: %.py | dirs
+	{ cp $< $@ && chmod +x $@; } || rm -f $@
+
 include rules/adb.mk
 include rules/boringssl.mk
 include rules/fastboot.mk
@@ -49,8 +52,9 @@ include rules/libusb.mk
 include rules/libutils.mk
 include rules/libziparchive.mk
 
-BINS += core/mkbootimg/mkbootimg
-BINS += core/mkbootimg/unpack_bootimg
+BINS += obj/core/mkbootimg/mkbootimg
+BINS += obj/core/mkbootimg/unpack_bootimg
+DIRS += obj/core/mkbootimg
 
 BINS := $(sort $(BINS))
 DIRS := $(sort $(DIRS))
