@@ -30,7 +30,9 @@ LIBSELINUX_SRC_FILES := \
     src/compute_create.c \
     src/compute_member.c \
     src/context.c \
+    src/deny_unknown.c \
     src/enabled.c \
+    src/fgetfilecon.c \
     src/freecon.c \
     src/get_initial_context.c \
     src/getenforce.c \
@@ -40,12 +42,17 @@ LIBSELINUX_SRC_FILES := \
     src/label_backends_android.c \
     src/label_file.c \
     src/label_support.c \
+    src/lgetfilecon.c \
     src/load_policy.c \
+    src/lsetfilecon.c \
     src/mapping.c \
     src/matchpathcon.c \
     src/procattr.c \
     src/regex.c \
+    src/reject_unknown.c \
+    src/setenforce.c \
     src/setexecfilecon.c \
+    src/setfilecon.c \
     src/setrans_client.c \
     src/sha1.c \
     src/stringrep.c \

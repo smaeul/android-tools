@@ -14,9 +14,11 @@ LIBBASE_CXXFLAGS := \
 
 LIBBASE_SRC_FILES := \
     chrono_utils.cpp \
+    cmsg.cpp \
     errors_unix.cpp \
     file.cpp \
     logging.cpp \
+    mapped_file.cpp \
     parsenetaddress.cpp \
     properties.cpp \
     quick_exit.cpp \

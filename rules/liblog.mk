@@ -13,6 +13,7 @@ LIBLOG_CFLAGS := \
     -I$(srcdir)/include \
 
 LIBLOG_CXXFLAGS := \
+    -D_LIBCPP_HAS_NO_ATOMIC_HEADER \
     -DFAKE_LOG_DEVICE=1 \
     -DLIBLOG_LOG_TAG=1006 \
     -DSNET_EVENT_LOG_TAG=1397638484 \
@@ -22,20 +23,18 @@ LIBLOG_CXXFLAGS := \
     -I$(srcdir)/include \
 
 LIBLOG_SRC_FILES := \
-    config_read.c \
-    config_write.c \
-    fake_log_device.c \
-    fake_writer.c \
-    local_logger.c \
-    log_event_list.c \
-    log_event_write.c \
-    log_ratelimit.cpp \
-    logger_lock.c \
-    logger_name.c \
-    logger_read.c \
-    logger_write.c \
-    logprint.c \
-    stderr_write.c \
+    config_read.cpp \
+    config_write.cpp \
+    fake_log_device.cpp \
+    fake_writer.cpp \
+    log_event_list.cpp \
+    log_event_write.cpp \
+    logger_lock.cpp \
+    logger_name.cpp \
+    logger_read.cpp \
+    logger_write.cpp \
+    logprint.cpp \
+    stderr_write.cpp \
 
 LIBLOG_C_OBJ_FILES := \
     $(patsubst %.c,obj/liblog/%.o,$(filter %.c,$(LIBLOG_SRC_FILES)))

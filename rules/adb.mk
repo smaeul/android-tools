@@ -7,6 +7,7 @@ adb_version := $(shell git submodule status core | cut -c2-9)-android
 
 ADB_COMMON_CXXFLAGS := \
     -DADB_HOST=1 \
+    -DALLOW_ADBD_ROOT=0 \
     -DADB_VERSION='"$(adb_version)"' \
     -I$(srcdir)/boringssl/include \
     -I$(srcdir)/core/base/include \
@@ -14,11 +15,10 @@ ADB_COMMON_CXXFLAGS := \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/libcrypto_utils/include \
     -I$(srcdir)/include \
-    -Iobj/include \
     -Wexit-time-destructors \
     -Wno-missing-field-initializers \
+    -Wno-thread-safety \
     -Wno-unused-parameter \
-    -Wthread-safety \
     -Wvla \
 
 # libadb
@@ -40,6 +40,7 @@ LIBADB_SRC_FILES := \
     adb_trace.cpp \
     adb_unique_fd.cpp \
     adb_utils.cpp \
+    client/adb_install.cpp \
     client/auth.cpp \
     client/transport_mdns.cpp \
     client/usb_dispatch.cpp \

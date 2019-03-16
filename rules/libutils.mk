@@ -6,7 +6,9 @@ LIBUTILS_ARCHIVE := obj/libutils/libutils.a
 LIBUTILS_CXXFLAGS := \
     -DLIBUTILS_NATIVE=1 \
     -fvisibility=protected \
+    -I$(srcdir)/core/base/include \
     -I$(srcdir)/core/include \
+    -I$(srcdir)/core/libprocessgroup/include \
     -I$(srcdir)/include \
     -include limits.h \
 

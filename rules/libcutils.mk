@@ -20,23 +20,21 @@ LIBCUTILS_CXXFLAGS := \
 LIBCUTILS_SRC_FILES := \
     android_get_control_file.cpp \
     ashmem-host.cpp \
+    canned_fs_config.cpp \
     config_utils.cpp \
     fs.cpp \
     fs_config.cpp \
-    canned_fs_config.cpp \
     hashmap.cpp \
     iosched_policy.cpp \
     load_file.cpp \
     multiuser.cpp \
     native_handle.cpp \
-    open_memstream.c \
     record_stream.cpp \
-    sched_policy.cpp \
-    sockets.cpp \
     socket_inaddr_any_server_unix.cpp \
     socket_local_client_unix.cpp \
     socket_local_server_unix.cpp \
     socket_network_client_unix.cpp \
+    sockets.cpp \
     sockets_unix.cpp \
     str_parms.cpp \
     strdup16to8.cpp \

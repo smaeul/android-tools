@@ -3,7 +3,8 @@
 
 LIBEXT4_UTILS_ARCHIVE := obj/libext4_utils/libext4_utils.a
 
-LIBEXT4_UTILS_CFLAGS := \
+LIBEXT4_UTILS_CXXFLAGS := \
+    -I$(srcdir)/core/base/include \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/libsparse/include \
     -I$(srcdir)/extras/ext4_utils/include \
@@ -11,15 +12,9 @@ LIBEXT4_UTILS_CFLAGS := \
     -I$(srcdir)/selinux/libselinux/include \
 
 LIBEXT4_UTILS_SRC_FILES := \
-    allocate.c \
-    contents.c \
-    crc16.c \
-    ext4_sb.c \
-    ext4_utils.c \
-    extent.c \
-    indirect.c \
-    sha1.c \
-    wipe.c \
+    ext4_sb.cpp \
+    ext4_utils.cpp \
+    wipe.cpp \
 
 LIBEXT4_UTILS_C_OBJ_FILES := \
     $(patsubst %.c,obj/libext4_utils/%.o,$(filter %.c,$(LIBEXT4_UTILS_SRC_FILES)))

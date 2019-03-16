@@ -1,51 +1,80 @@
-# fastboot host tool
+fastboot_version := $(shell git submodule status core | cut -c2-9)-android
+
+FASTBOOT_COMMON_CXXFLAGS := \
+    -DFASTBOOT_VERSION='"$(fastboot_version)"' \
+
+# libfastboot
 # =========================================================
 
-fastboot_version := $(shell git submodule status core | cut -c2-9)-android
+LIBFASTBOOT_ARCHIVE := obj/libfastboot/libfastboot.a
+
+LIBFASTBOOT_CXXFLAGS := \
+    $(FASTBOOT_COMMON_CXXFLAGS) \
+    -include sys/select.h \
+    -I$(srcdir)/core/base/include \
+    -I$(srcdir)/core/diagnose_usb/include \
+    -I$(srcdir)/core/fs_mgr/liblp/include \
+    -I$(srcdir)/core/libcutils/include \
+    -I$(srcdir)/core/libsparse/include \
+    -I$(srcdir)/core/libziparchive/include \
+    -I$(srcdir)/core/mkbootimg/include/bootimg \
+    -I$(srcdir)/include \
+
+LIBFASTBOOT_SRC_FILES := \
+    bootimg_utils.cpp \
+    fastboot.cpp \
+    fastboot_driver.cpp \
+    fs.cpp \
+    socket.cpp \
+    tcp.cpp \
+    udp.cpp \
+    usb_linux.cpp \
+
+LIBFASTBOOT_OBJ_FILES := \
+    $(patsubst %.cpp,obj/libfastboot/%.o,$(LIBFASTBOOT_SRC_FILES))
+
+DIRS += $(dir $(LIBFASTBOOT_OBJ_FILES))
+
+libfastboot: $(LIBFASTBOOT_ARCHIVE)
+
+$(LIBFASTBOOT_ARCHIVE): $(LIBFASTBOOT_OBJ_FILES) | dirs
+	$(AR) rcs $@ $^
+
+$(LIBFASTBOOT_OBJ_FILES): obj/libfastboot/%.o: $(srcdir)/core/fastboot/%.cpp | dirs
+	$(CXX) $(CXXFLAGS) $(LIBFASTBOOT_CXXFLAGS) -c -o $@ $^
+
+# fastboot host tool
+# =========================================================
 
 FASTBOOT_BINARY := obj/fastboot/fastboot
 
 FASTBOOT_CXXFLAGS := \
-    -DFASTBOOT_VERSION='"$(fastboot_version)"' \
-    -include sys/select.h \
-    -I$(srcdir)/boringssl/third_party/googletest/include \
-    -I$(srcdir)/core/base/include \
-    -I$(srcdir)/core/diagnose_usb/include \
+    $(FASTBOOT_COMMON_CXXFLAGS) \
     -I$(srcdir)/core/fastboot \
     -I$(srcdir)/core/include \
-    -I$(srcdir)/core/libsparse/include \
-    -I$(srcdir)/core/libziparchive/include \
     -I$(srcdir)/core/mkbootimg/include/bootimg \
     -I$(srcdir)/extras/ext4_utils/include \
     -I$(srcdir)/extras/f2fs_utils \
-    -I$(srcdir)/include \
 
 FASTBOOT_LDFLAGS := \
     -lz \
 
 FASTBOOT_LIBS := \
+    libfastboot \
     libbase \
     libcutils \
     libdiagnose_usb \
-    libext4_utils \
     libselinux \
     libsparse \
     libziparchive \
     liblog \
+    liblp \
+    libext4_utils \
     libpcre \
     libutils \
 
 FASTBOOT_SRC_FILES := \
-    bootimg_utils.cpp \
-    engine.cpp \
-    fastboot.cpp \
-    fs.cpp \
     main.cpp \
-    protocol.cpp \
-    socket.cpp \
-    tcp.cpp \
-    udp.cpp \
-    usb_linux.cpp \
     util.cpp \
 
 FASTBOOT_LIB_DEPS := \

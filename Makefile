@@ -12,7 +12,7 @@ CFLAGS += \
 CXX = clang++ -stdlib=libc++
 CXXFLAGS ?= -g0 -Os
 CXXFLAGS += \
-    -std=gnu++14 \
+    -std=gnu++2a \
     -Wall \
     -Wextra \
     -Werror=implicit-function-declaration \
@@ -40,6 +40,7 @@ include rules/libcutils.mk
 include rules/libdiagnose_usb.mk
 include rules/libext4_utils.mk
 include rules/liblog.mk
+include rules/liblp.mk
 include rules/libmdnssd.mk
 include rules/libpcre.mk
 include rules/libselinux.mk
