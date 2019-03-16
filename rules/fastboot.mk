@@ -56,8 +56,7 @@ FASTBOOT_CXXFLAGS := \
     -I$(srcdir)/extras/ext4_utils/include \
     -I$(srcdir)/extras/f2fs_utils \
 
-FASTBOOT_LDFLAGS := \
-    -lz \
+FASTBOOT_LDFLAGS := $(shell pkg-config --libs zlib)
 
 FASTBOOT_LIBS := \
     libfastboot \

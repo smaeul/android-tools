@@ -46,8 +46,7 @@ SIMG2IMG_BINARY := obj/simg2img/simg2img
 SIMG2IMG_CFLAGS := \
     -I$(srcdir)/core/libsparse/include \
 
-SIMG2IMG_LDFLAGS := \
-    -lz \
+SIMG2IMG_LDFLAGS := $(shell pkg-config --libs zlib)
 
 SIMG2IMG_LIBS := \
     libsparse \
@@ -81,8 +80,7 @@ IMG2SIMG_BINARY := obj/img2simg/img2simg
 IMG2SIMG_CFLAGS := \
     -I$(srcdir)/core/libsparse/include \
 
-IMG2SIMG_LDFLAGS := \
-    -lz \
+IMG2SIMG_LDFLAGS := $(shell pkg-config --libs zlib)
 
 IMG2SIMG_LIBS := \
     libsparse \
@@ -116,8 +114,7 @@ APPEND2SIMG_BINARY := obj/append2simg/append2simg
 APPEND2SIMG_CFLAGS := \
     -I$(srcdir)/core/libsparse/include \
 
-APPEND2SIMG_LDFLAGS := \
-    -lz \
+APPEND2SIMG_LDFLAGS := $(shell pkg-config --libs zlib)
 
 APPEND2SIMG_LIBS := \
     libsparse \
