@@ -32,11 +32,14 @@ all:
 clean:
 	rm -fr obj
 
+distclean: clean
+	git -C $(srcdir)/core reset -q --hard
+	rm -f .patch.stamp
+
 obj/%: %.py | dirs
 	{ cp $< $@ && chmod +x $@; } || rm -f $@
 
 include rules/adb.mk
-include rules/boringssl.mk
 include rules/fastboot.mk
 include rules/libbase.mk
 include rules/libcrypto_utils.mk

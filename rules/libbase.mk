@@ -6,10 +6,10 @@ LIBBASE_ARCHIVE := obj/libbase/libbase.a
 LIBBASE_CXXFLAGS := \
     -DDEFFILEMODE=0666 \
     -D'getprogname()=program_invocation_short_name' \
-    -I$(srcdir)/boringssl/include \
+    -I$(srcdir)/include \
+    $(shell pkg-config --cflags libcrypto) \
     -I$(srcdir)/core/base/include \
     -I$(srcdir)/core/include \
-    -I$(srcdir)/include \
     -Wexit-time-destructors \
 
 LIBBASE_SRC_FILES := \

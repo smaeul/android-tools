@@ -4,7 +4,9 @@
 LIBCRYPTO_UTILS_ARCHIVE := obj/libcrypto_utils/libcrypto_utils.a
 
 LIBCRYPTO_UTILS_CFLAGS := \
-    -I$(srcdir)/boringssl/include \
+    -D'BN_bn2bin_padded(out, len, in)=BN_bn2bin(in, out)' \
+    -I$(srcdir)/include \
+    $(shell pkg-config --cflags libcrypto) \
     -I$(srcdir)/core/libcrypto_utils/include \
 
 LIBCRYPTO_UTILS_SRC_FILES := \
@@ -23,8 +25,11 @@ libcrypto_utils: $(LIBCRYPTO_UTILS_ARCHIVE)
 $(LIBCRYPTO_UTILS_ARCHIVE): $(LIBCRYPTO_UTILS_C_OBJ_FILES) $(LIBCRYPTO_UTILS_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
-$(LIBCRYPTO_UTILS_C_OBJ_FILES): obj/libcrypto_utils/%.o: $(srcdir)/core/libcrypto_utils/%.c | dirs
+$(LIBCRYPTO_UTILS_C_OBJ_FILES): obj/libcrypto_utils/%.o: $(srcdir)/core/libcrypto_utils/%.c | dirs .patch.stamp
 	$(CC) $(CFLAGS) $(LIBCRYPTO_UTILS_CFLAGS) -c -o $@ $^
 
 $(LIBCRYPTO_UTILS_CXX_OBJ_FILES): obj/libcrypto_utils/%.o: $(srcdir)/core/libcrypto_utils/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(LIBCRYPTO_UTILS_CXXFLAGS) -c -o $@ $^
+
+.patch.stamp: $(srcdir)/android_pubkey.patch $(srcdir)/core/libcrypto_utils/android_pubkey.c
+	patch -i $^ && touch $@

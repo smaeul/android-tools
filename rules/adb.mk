@@ -9,12 +9,12 @@ ADB_COMMON_CXXFLAGS := \
     -DADB_HOST=1 \
     -DALLOW_ADBD_ROOT=0 \
     -DADB_VERSION='"$(adb_version)"' \
-    -I$(srcdir)/boringssl/include \
+    -I$(srcdir)/include \
+    $(shell pkg-config --cflags libcrypto) \
     -I$(srcdir)/core/base/include \
     -I$(srcdir)/core/diagnose_usb/include \
     -I$(srcdir)/core/include \
     -I$(srcdir)/core/libcrypto_utils/include \
-    -I$(srcdir)/include \
     -Wexit-time-destructors \
     -Wno-missing-field-initializers \
     -Wno-thread-safety \
@@ -81,10 +81,11 @@ ADB_CXXFLAGS := \
     -D_GNU_SOURCE \
     -I$(srcdir)/core/adb \
 
+ADB_LDFLAGS := $(shell pkg-config --libs libcrypto)
+
 ADB_LIBS := \
     libadb \
     libbase \
-    libcrypto \
     libcrypto_utils \
     libcutils \
     libdiagnose_usb \
