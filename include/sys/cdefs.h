@@ -1,3 +1,7 @@
+#if defined(__GLIBC__)
+#include_next <sys/cdefs.h>
+#else
+
 #ifdef __cplusplus
 #define __BEGIN_DECLS extern "C" {
 #define __END_DECLS }
@@ -15,4 +19,6 @@
     } while (_rc == -1 && errno == EINTR);                                     \
     _rc;                                                                       \
   })
+#endif
+
 #endif

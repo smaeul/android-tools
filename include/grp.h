@@ -13,9 +13,11 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <limits.h>
-
 #include_next <grp.h>
+
+#if !defined(__GLIBC__)
+
+#include <limits.h>
 
 static int group_member(gid_t gid)
 {
@@ -29,3 +31,5 @@ static int group_member(gid_t gid)
 			return 1;
 	return 0;
 }
+
+#endif

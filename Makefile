@@ -18,8 +18,9 @@ CXXFLAGS += \
     -Werror=implicit-function-declaration \
     -Werror=implicit-int \
     -Wno-unused-parameter
-LDFLAGS ?= -s -static -Wl,--hash-style=both
+LDFLAGS ?= -s -Wl,--hash-style=both
 LDFLAGS += \
+    -pthread \
     -Wl,--no-undefined \
     -Wl,-z,noexecstack \
     -Wl,-z,now \
