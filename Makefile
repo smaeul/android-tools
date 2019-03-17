@@ -34,10 +34,19 @@ clean:
 
 distclean: clean
 	git -C $(srcdir)/core reset -q --hard
-	rm -f .patch.stamp
+	rm -f .core.patch.stamp
 
 obj/%: %.py | dirs
 	{ cp $< $@ && chmod +x $@; } || rm -f $@
+
+.core.patch.stamp: $(srcdir)/patches/core.patch \
+    $(srcdir)/core/adb/client/usb_linux.cpp \
+    $(srcdir)/core/adb/transport_usb.cpp \
+    $(srcdir)/core/adb/types.h \
+    $(srcdir)/core/libcrypto_utils/android_pubkey.c
+	git -C $(srcdir)/core reset -q --hard
+	cd $(srcdir)/core && patch -p1 -i $<
+	touch $@
 
 include rules/adb.mk
 include rules/fastboot.mk

@@ -1,0 +1,163 @@
+diff --git a/adb/client/usb_linux.cpp b/adb/client/usb_linux.cpp
+index 116895894..ee398b6e4 100644
+--- a/adb/client/usb_linux.cpp
++++ b/adb/client/usb_linux.cpp
+@@ -256,8 +256,8 @@ static void find_usb_device(const std::string& base,
+                         }
+                             /* aproto 01 needs 0 termination */
+                         if (interface->bInterfaceProtocol == ADB_PROTOCOL) {
+-                            max_packet_size = ep1->wMaxPacketSize;
+-                            zero_mask = ep1->wMaxPacketSize - 1;
++                            max_packet_size = __le16_to_cpu(ep1->wMaxPacketSize);
++                            zero_mask = max_packet_size - 1;
+                         }
+ 
+                             // we have a match.  now we just need to figure out which is in and which is out.
+diff --git a/adb/transport_usb.cpp b/adb/transport_usb.cpp
+index 2e5918ab6..e8f9d62f1 100644
+--- a/adb/transport_usb.cpp
++++ b/adb/transport_usb.cpp
+@@ -51,7 +51,17 @@ static int UsbReadMessage(usb_handle* h, amessage* msg) {
+         D("usb_read returned unexpected length %d (expected %zu)", n, sizeof(*msg));
+         return -1;
+     }
+-    memcpy(msg, buffer, sizeof(*msg));
++    amessage tmp_msg;
++    memcpy(&tmp_msg, buffer, sizeof(*msg));
++    *msg = {
++        __le32_to_cpu(tmp_msg.command),
++        __le32_to_cpu(tmp_msg.arg0),
++        __le32_to_cpu(tmp_msg.arg1),
++        __le32_to_cpu(tmp_msg.data_length),
++        __le32_to_cpu(tmp_msg.data_check),
++        __le32_to_cpu(tmp_msg.magic),
++    };
++
+     return n;
+ #else
+     return usb_read(h, msg, sizeof(*msg));
+@@ -158,7 +168,15 @@ bool UsbConnection::Read(apacket* packet) {
+ bool UsbConnection::Write(apacket* packet) {
+     int size = packet->msg.data_length;
+ 
+-    if (usb_write(handle_, &packet->msg, sizeof(packet->msg)) != sizeof(packet->msg)) {
++    amessage tmp_msg = {
++        __cpu_to_le32(packet->msg.command),
++        __cpu_to_le32(packet->msg.arg0),
++        __cpu_to_le32(packet->msg.arg1),
++        __cpu_to_le32(packet->msg.data_length),
++        __cpu_to_le32(packet->msg.data_check),
++        __cpu_to_le32(packet->msg.magic),
++    };
++    if (usb_write(handle_, &tmp_msg, sizeof(tmp_msg)) != sizeof(tmp_msg)) {
+         PLOG(ERROR) << "remote usb: 1 - write terminated";
+         return false;
+     }
+diff --git a/adb/types.h b/adb/types.h
+index 0090c9878..84df962c6 100644
+--- a/adb/types.h
++++ b/adb/types.h
+@@ -122,13 +122,15 @@ struct Block {
+     size_t size_ = 0;
+ };
+ 
++#include <asm/byteorder.h>
++
+ struct amessage {
+-    uint32_t command;     /* command identifier constant      */
+-    uint32_t arg0;        /* first argument                   */
+-    uint32_t arg1;        /* second argument                  */
+-    uint32_t data_length; /* length of payload (0 is allowed) */
+-    uint32_t data_check;  /* checksum of data payload         */
+-    uint32_t magic;       /* command ^ 0xffffffff             */
++    __le32 command;     /* command identifier constant      */
++    __le32 arg0;        /* first argument                   */
++    __le32 arg1;        /* second argument                  */
++    __le32 data_length; /* length of payload (0 is allowed) */
++    __le32 data_check;  /* checksum of data payload         */
++    __le32 magic;       /* command ^ 0xffffffff             */
+ };
+ 
+ struct apacket {
+diff --git a/libcrypto_utils/android_pubkey.c b/libcrypto_utils/android_pubkey.c
+index 3052e52bf..bad3c73b0 100644
+--- a/libcrypto_utils/android_pubkey.c
++++ b/libcrypto_utils/android_pubkey.c
+@@ -65,6 +65,8 @@ bool android_pubkey_decode(const uint8_t* key_buffer, size_t size, RSA** key) {
+   const RSAPublicKey* key_struct = (RSAPublicKey*)key_buffer;
+   bool ret = false;
+   uint8_t modulus_buffer[ANDROID_PUBKEY_MODULUS_SIZE];
++  BIGNUM* e;
++  BIGNUM* n;
+   RSA* new_key = RSA_new();
+   if (!new_key) {
+     goto cleanup;
+@@ -81,14 +83,18 @@ bool android_pubkey_decode(const uint8_t* key_buffer, size_t size, RSA** key) {
+   // Convert the modulus to big-endian byte order as expected by BN_bin2bn.
+   memcpy(modulus_buffer, key_struct->modulus, sizeof(modulus_buffer));
+   reverse_bytes(modulus_buffer, sizeof(modulus_buffer));
+-  new_key->n = BN_bin2bn(modulus_buffer, sizeof(modulus_buffer), NULL);
+-  if (!new_key->n) {
++  n = BN_bin2bn(modulus_buffer, sizeof(modulus_buffer), NULL);
++  if (!n) {
+     goto cleanup;
+   }
+ 
+   // Read the exponent.
+-  new_key->e = BN_new();
+-  if (!new_key->e || !BN_set_word(new_key->e, key_struct->exponent)) {
++  e = BN_new();
++  if (!e || !BN_set_word(e, key_struct->exponent)) {
++    goto cleanup;
++  }
++
++  if (!RSA_set0_key(new_key, e, n, NULL)) {
+     goto cleanup;
+   }
+ 
+@@ -126,37 +132,41 @@ bool android_pubkey_encode(const RSA* key, uint8_t* key_buffer, size_t size) {
+   BIGNUM* r32 = BN_new();
+   BIGNUM* n0inv = BN_new();
+   BIGNUM* rr = BN_new();
++  const BIGNUM* e;
++  const BIGNUM* n;
+ 
+   if (sizeof(RSAPublicKey) > size ||
+       RSA_size(key) != ANDROID_PUBKEY_MODULUS_SIZE) {
+     goto cleanup;
+   }
+ 
++  RSA_get0_key(key, &e, &n, NULL);
++
+   // Store the modulus size.
+   key_struct->modulus_size_words = ANDROID_PUBKEY_MODULUS_SIZE_WORDS;
+ 
+   // Compute and store n0inv = -1 / N[0] mod 2^32.
+   if (!ctx || !r32 || !n0inv || !BN_set_bit(r32, 32) ||
+-      !BN_mod(n0inv, key->n, r32, ctx) ||
++      !BN_mod(n0inv, n, r32, ctx) ||
+       !BN_mod_inverse(n0inv, n0inv, r32, ctx) || !BN_sub(n0inv, r32, n0inv)) {
+     goto cleanup;
+   }
+   key_struct->n0inv = (uint32_t)BN_get_word(n0inv);
+ 
+   // Store the modulus.
+-  if (!android_pubkey_encode_bignum(key->n, key_struct->modulus)) {
++  if (!android_pubkey_encode_bignum(n, key_struct->modulus)) {
+     goto cleanup;
+   }
+ 
+   // Compute and store rr = (2^(rsa_size)) ^ 2 mod N.
+   if (!ctx || !rr || !BN_set_bit(rr, ANDROID_PUBKEY_MODULUS_SIZE * 8) ||
+-      !BN_mod_sqr(rr, rr, key->n, ctx) ||
++      !BN_mod_sqr(rr, rr, n, ctx) ||
+       !android_pubkey_encode_bignum(rr, key_struct->rr)) {
+     goto cleanup;
+   }
+ 
+   // Store the exponent.
+-  key_struct->exponent = (uint32_t)BN_get_word(key->e);
++  key_struct->exponent = (uint32_t)BN_get_word(e);
+ 
+   ret = true;
+ 
