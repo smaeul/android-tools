@@ -15,10 +15,10 @@ LIBCUTILS_CXXFLAGS := \
     -I$(srcdir)/core/libcutils/include \
     -I$(srcdir)/core/include \
     -I$(srcdir)/include \
+    -include sys/select.h \
     -Wexit-time-destructors \
 
 LIBCUTILS_SRC_FILES := \
-    android_get_control_file.cpp \
     ashmem-host.cpp \
     canned_fs_config.cpp \
     config_utils.cpp \

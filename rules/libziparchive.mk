@@ -17,7 +17,6 @@ LIBZIPARCHIVE_CXXFLAGS := \
 LIBZIPARCHIVE_SRC_FILES := \
     zip_archive.cc \
     zip_archive_stream_entry.cc \
-    zip_writer.cc \
 
 LIBZIPARCHIVE_CXX_OBJ_FILES := \
     $(patsubst %.cc,obj/libziparchive/%.o,$(LIBZIPARCHIVE_SRC_FILES))
