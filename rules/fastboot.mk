@@ -2,6 +2,7 @@ fastboot_version := $(shell git submodule status core | cut -c2-9)-android
 
 FASTBOOT_COMMON_CXXFLAGS := \
     -DFASTBOOT_VERSION='"$(fastboot_version)"' \
+    -I$(srcdir)/mkbootimg/include/bootimg \
 
 # libfastboot
 # =========================================================
@@ -17,7 +18,6 @@ LIBFASTBOOT_CXXFLAGS := \
     -I$(srcdir)/core/libcutils/include \
     -I$(srcdir)/core/libsparse/include \
     -I$(srcdir)/core/libziparchive/include \
-    -I$(srcdir)/core/mkbootimg/include/bootimg \
     -I$(srcdir)/include \
 
 LIBFASTBOOT_SRC_FILES := \
@@ -52,7 +52,6 @@ FASTBOOT_CXXFLAGS := \
     $(FASTBOOT_COMMON_CXXFLAGS) \
     -I$(srcdir)/core/fastboot \
     -I$(srcdir)/core/include \
-    -I$(srcdir)/core/mkbootimg/include/bootimg \
     -I$(srcdir)/extras/ext4_utils/include \
     -I$(srcdir)/extras/f2fs_utils \
 

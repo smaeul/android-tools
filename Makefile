@@ -65,9 +65,9 @@ include rules/libusb.mk
 include rules/libutils.mk
 include rules/libziparchive.mk
 
-BINS += obj/core/mkbootimg/mkbootimg
-BINS += obj/core/mkbootimg/unpack_bootimg
-DIRS += obj/core/mkbootimg
+BINS += obj/mkbootimg/mkbootimg
+BINS += obj/mkbootimg/unpack_bootimg
+DIRS += obj/mkbootimg
 
 BINS := $(sort $(BINS))
 DIRS := $(sort $(DIRS))

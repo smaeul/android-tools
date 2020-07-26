@@ -9,6 +9,7 @@ ADB_COMMON_CXXFLAGS := \
     -DADB_HOST=1 \
     -DALLOW_ADBD_ROOT=0 \
     -DADB_VERSION='"$(adb_version)"' \
+    -DANDROID_BASE_UNIQUE_FD_DISABLE_IMPLICIT_CONVERSION=1 \
     -I$(srcdir)/include \
     $(shell pkg-config --cflags libcrypto) \
     -I$(srcdir)/core/base/include \
@@ -46,7 +47,8 @@ LIBADB_SRC_FILES := \
     client/usb_dispatch.cpp \
     client/usb_libusb.cpp \
     client/usb_linux.cpp \
-    fdevent.cpp \
+    fdevent/fdevent.cpp \
+    fdevent/fdevent_poll.cpp \
     services.cpp \
     sockets.cpp \
     socket_spec.cpp \

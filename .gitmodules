@@ -10,6 +10,9 @@
 [submodule "mdnsresponder"]
 	path = mdnsresponder
 	url = https://android.googlesource.com/platform/external/mdnsresponder
+[submodule "mkbootimg"]
+	path = mkbootimg
+	url = https://android.googlesource.com/platform/system/tools/mkbootimg
 [submodule "pcre"]
 	path = pcre
 	url = https://android.googlesource.com/platform/external/pcre
