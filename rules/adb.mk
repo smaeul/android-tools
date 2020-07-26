@@ -10,12 +10,12 @@ ADB_COMMON_CXXFLAGS := \
     -DALLOW_ADBD_ROOT=0 \
     -DADB_VERSION='"$(adb_version)"' \
     -DANDROID_BASE_UNIQUE_FD_DISABLE_IMPLICIT_CONVERSION=1 \
-    -I$(srcdir)/include \
+    -I$(src)/include \
     $(shell pkg-config --cflags libcrypto) \
-    -I$(srcdir)/core/base/include \
-    -I$(srcdir)/core/diagnose_usb/include \
-    -I$(srcdir)/core/include \
-    -I$(srcdir)/core/libcrypto_utils/include \
+    -I$(src)/core/base/include \
+    -I$(src)/core/diagnose_usb/include \
+    -I$(src)/core/include \
+    -I$(src)/core/libcrypto_utils/include \
     -Wexit-time-destructors \
     -Wno-missing-field-initializers \
     -Wno-thread-safety \
@@ -25,14 +25,14 @@ ADB_COMMON_CXXFLAGS := \
 # libadb
 # =========================================================
 
-LIBADB_ARCHIVE := obj/libadb/libadb.a
+LIBADB_ARCHIVE := $(obj)/libadb/libadb.a
 
 LIBADB_CXXFLAGS := \
     $(ADB_COMMON_CXXFLAGS) \
     -fvisibility=hidden \
-    -I$(srcdir)/core/adb \
-    -I$(srcdir)/libusb/include \
-    -I$(srcdir)/mdnsresponder/mDNSShared \
+    -I$(src)/core/adb \
+    -I$(src)/libusb/include \
+    -I$(src)/mdnsresponder/mDNSShared \
 
 LIBADB_SRC_FILES := \
     adb.cpp \
@@ -61,7 +61,7 @@ LIBADB_SRC_FILES := \
     transport_usb.cpp \
 
 LIBADB_OBJ_FILES := \
-    $(patsubst %.cpp,obj/libadb/%.o,$(LIBADB_SRC_FILES))
+    $(patsubst %.cpp,$(obj)/libadb/%.o,$(LIBADB_SRC_FILES))
 
 DIRS += $(dir $(LIBADB_OBJ_FILES))
 
@@ -70,18 +70,18 @@ libadb: $(LIBADB_ARCHIVE)
 $(LIBADB_ARCHIVE): $(LIBADB_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
-$(LIBADB_OBJ_FILES): obj/libadb/%.o: $(srcdir)/core/adb/%.cpp | dirs
+$(LIBADB_OBJ_FILES): $(obj)/libadb/%.o: $(src)/core/adb/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(LIBADB_CXXFLAGS) -c -o $@ $^
 
 # adb host tool
 # =========================================================
 
-ADB_BINARY := obj/adb/adb
+ADB_BINARY := $(obj)/adb/adb
 
 ADB_CXXFLAGS := \
     $(ADB_COMMON_CXXFLAGS) \
     -D_GNU_SOURCE \
-    -I$(srcdir)/core/adb \
+    -I$(src)/core/adb \
 
 ADB_LDFLAGS := $(shell pkg-config --libs libcrypto)
 
@@ -106,10 +106,10 @@ ADB_SRC_FILES := \
     shell_service_protocol.cpp \
 
 ADB_LIB_DEPS := \
-	$(foreach lib,$(ADB_LIBS),obj/$(lib)/$(lib).a)
+	$(foreach lib,$(ADB_LIBS),$(obj)/$(lib)/$(lib).a)
 
 ADB_OBJ_FILES := \
-    $(patsubst %.cpp,obj/adb/%.o,$(ADB_SRC_FILES))
+    $(patsubst %.cpp,$(obj)/adb/%.o,$(ADB_SRC_FILES))
 
 BINS += $(ADB_BINARY)
 DIRS += $(dir $(ADB_OBJ_FILES))
@@ -119,5 +119,5 @@ adb: $(ADB_BINARY)
 $(ADB_BINARY): $(ADB_OBJ_FILES) $(ADB_LIB_DEPS) | dirs
 	$(CXX) $(CXXFLAGS) $(ADB_CXXFLAGS) -o $@ $^ $(LDFLAGS) $(ADB_LDFLAGS)
 
-$(ADB_OBJ_FILES): obj/adb/%.o: $(srcdir)/core/adb/%.cpp | dirs
+$(ADB_OBJ_FILES): $(obj)/adb/%.o: $(src)/core/adb/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(ADB_CXXFLAGS) -c -o $@ $^

@@ -1,13 +1,13 @@
 # libusb
 # =========================================================
 
-LIBUSB_ARCHIVE := obj/libusb/libusb.a
+LIBUSB_ARCHIVE := $(obj)/libusb/libusb.a
 
 LIBUSB_CFLAGS := \
-    -I$(srcdir)/libusb/include \
-    -I$(srcdir)/libusb/libusb \
-    -I$(srcdir)/libusb/libusb/os \
-    -I$(srcdir)/libusb/linux \
+    -I$(src)/libusb/include \
+    -I$(src)/libusb/libusb \
+    -I$(src)/libusb/libusb/os \
+    -I$(src)/libusb/linux \
 
 LIBUSB_SRC_FILES := \
     core.c \
@@ -22,10 +22,10 @@ LIBUSB_SRC_FILES := \
     os/linux_netlink.c \
 
 LIBUSB_C_OBJ_FILES := \
-    $(patsubst %.c,obj/libusb/%.o,$(filter %.c,$(LIBUSB_SRC_FILES)))
+    $(patsubst %.c,$(obj)/libusb/%.o,$(filter %.c,$(LIBUSB_SRC_FILES)))
 
 LIBUSB_CXX_OBJ_FILES := \
-    $(patsubst %.cpp,obj/libusb/%.o,$(filter %.cpp,$(LIBUSB_SRC_FILES)))
+    $(patsubst %.cpp,$(obj)/libusb/%.o,$(filter %.cpp,$(LIBUSB_SRC_FILES)))
 
 DIRS += $(dir $(LIBUSB_C_OBJ_FILES) $(LIBUSB_CXX_OBJ_FILES))
 
@@ -34,8 +34,8 @@ libusb: $(LIBUSB_ARCHIVE)
 $(LIBUSB_ARCHIVE): $(LIBUSB_C_OBJ_FILES) $(LIBUSB_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
-$(LIBUSB_C_OBJ_FILES): obj/libusb/%.o: $(srcdir)/libusb/libusb/%.c | dirs
+$(LIBUSB_C_OBJ_FILES): $(obj)/libusb/%.o: $(src)/libusb/libusb/%.c | dirs
 	$(CC) $(CFLAGS) $(LIBUSB_CFLAGS) -c -o $@ $^
 
-$(LIBUSB_CXX_OBJ_FILES): obj/libusb/%.o: $(srcdir)/libusb/libusb/%.cpp | dirs
+$(LIBUSB_CXX_OBJ_FILES): $(obj)/libusb/%.o: $(src)/libusb/libusb/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(LIBUSB_CXXFLAGS) -c -o $@ $^

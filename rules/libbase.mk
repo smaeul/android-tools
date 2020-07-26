@@ -1,16 +1,16 @@
 # libbase
 # =========================================================
 
-LIBBASE_ARCHIVE := obj/libbase/libbase.a
+LIBBASE_ARCHIVE := $(obj)/libbase/libbase.a
 
 LIBBASE_CXXFLAGS := \
     -DDEFFILEMODE=0666 \
     -D'PAGE_SIZE=getpagesize()' \
     -D'getprogname()=program_invocation_short_name' \
-    -I$(srcdir)/include \
+    -I$(src)/include \
     $(shell pkg-config --cflags libcrypto) \
-    -I$(srcdir)/core/base/include \
-    -I$(srcdir)/core/include \
+    -I$(src)/core/base/include \
+    -I$(src)/core/include \
     -Wexit-time-destructors \
 
 LIBBASE_SRC_FILES := \
@@ -29,7 +29,7 @@ LIBBASE_SRC_FILES := \
     threads.cpp \
 
 LIBBASE_OBJ_FILES := \
-    $(patsubst %.cpp,obj/libbase/%.o,$(LIBBASE_SRC_FILES))
+    $(patsubst %.cpp,$(obj)/libbase/%.o,$(LIBBASE_SRC_FILES))
 
 DIRS += $(dir $(LIBBASE_OBJ_FILES))
 
@@ -38,5 +38,5 @@ libbase: $(LIBBASE_ARCHIVE)
 $(LIBBASE_ARCHIVE): $(LIBBASE_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
-$(LIBBASE_OBJ_FILES): obj/libbase/%.o: $(srcdir)/core/base/%.cpp | dirs
+$(LIBBASE_OBJ_FILES): $(obj)/libbase/%.o: $(src)/core/base/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(LIBBASE_CXXFLAGS) -c -o $@ $^

@@ -1,7 +1,7 @@
 # libselinux
 # =========================================================
 
-LIBSELINUX_ARCHIVE := obj/libselinux/libselinux.a
+LIBSELINUX_ARCHIVE := $(obj)/libselinux/libselinux.a
 
 LIBSELINUX_CFLAGS := \
     -D_GNU_SOURCE \
@@ -14,9 +14,9 @@ LIBSELINUX_CFLAGS := \
     -DNO_PERSISTENTLY_STORED_PATTERNS \
     -DNO_X_BACKEND \
     -DUSE_PCRE2 \
-    -I$(srcdir)/pcre/include \
-    -I$(srcdir)/selinux/libselinux/include \
-    -I$(srcdir)/selinux/libsepol/include \
+    -I$(src)/pcre/include \
+    -I$(src)/selinux/libselinux/include \
+    -I$(src)/selinux/libsepol/include \
     -Wno-pointer-bool-conversion
 
 LIBSELINUX_SRC_FILES := \
@@ -58,10 +58,10 @@ LIBSELINUX_SRC_FILES := \
     src/stringrep.c \
 
 LIBSELINUX_C_OBJ_FILES := \
-    $(patsubst %.c,obj/libselinux/%.o,$(filter %.c,$(LIBSELINUX_SRC_FILES)))
+    $(patsubst %.c,$(obj)/libselinux/%.o,$(filter %.c,$(LIBSELINUX_SRC_FILES)))
 
 LIBSELINUX_CXX_OBJ_FILES := \
-    $(patsubst %.cpp,obj/libselinux/%.o,$(filter %.cpp,$(LIBSELINUX_SRC_FILES)))
+    $(patsubst %.cpp,$(obj)/libselinux/%.o,$(filter %.cpp,$(LIBSELINUX_SRC_FILES)))
 
 DIRS += $(dir $(LIBSELINUX_C_OBJ_FILES) $(LIBSELINUX_CXX_OBJ_FILES))
 
@@ -70,8 +70,8 @@ libselinux: $(LIBSELINUX_ARCHIVE)
 $(LIBSELINUX_ARCHIVE): $(LIBSELINUX_C_OBJ_FILES) $(LIBSELINUX_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
-$(LIBSELINUX_C_OBJ_FILES): obj/libselinux/%.o: $(srcdir)/selinux/libselinux/%.c | dirs
+$(LIBSELINUX_C_OBJ_FILES): $(obj)/libselinux/%.o: $(src)/selinux/libselinux/%.c | dirs
 	$(CC) $(CFLAGS) $(LIBSELINUX_CFLAGS) -c -o $@ $^
 
-$(LIBSELINUX_CXX_OBJ_FILES): obj/libselinux/%.o: $(srcdir)/selinux/libselinux/%.cpp | dirs
+$(LIBSELINUX_CXX_OBJ_FILES): $(obj)/libselinux/%.o: $(src)/selinux/libselinux/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(LIBSELINUX_CXXFLAGS) -c -o $@ $^

@@ -1,12 +1,12 @@
 # libpcre
 # =========================================================
 
-LIBPCRE_ARCHIVE := obj/libpcre/libpcre.a
+LIBPCRE_ARCHIVE := $(obj)/libpcre/libpcre.a
 
 LIBPCRE_CFLAGS := \
     -DHAVE_CONFIG_H \
-    -I$(srcdir)/pcre/include \
-    -I$(srcdir)/pcre/include_internal \
+    -I$(src)/pcre/include \
+    -I$(src)/pcre/include_internal \
 
 LIBPCRE_SRC_FILES := \
     dist2/src/pcre2_auto_possess.c \
@@ -35,10 +35,10 @@ LIBPCRE_SRC_FILES := \
     dist2/src/pcre2_xclass.c \
 
 LIBPCRE_C_OBJ_FILES := \
-    $(patsubst %.c,obj/libpcre/%.o,$(filter %.c,$(LIBPCRE_SRC_FILES)))
+    $(patsubst %.c,$(obj)/libpcre/%.o,$(filter %.c,$(LIBPCRE_SRC_FILES)))
 
 LIBPCRE_CXX_OBJ_FILES := \
-    $(patsubst %.cpp,obj/libpcre/%.o,$(filter %.cpp,$(LIBPCRE_SRC_FILES)))
+    $(patsubst %.cpp,$(obj)/libpcre/%.o,$(filter %.cpp,$(LIBPCRE_SRC_FILES)))
 
 DIRS += $(dir $(LIBPCRE_C_OBJ_FILES) $(LIBPCRE_CXX_OBJ_FILES))
 
@@ -47,8 +47,8 @@ libpcre: $(LIBPCRE_ARCHIVE)
 $(LIBPCRE_ARCHIVE): $(LIBPCRE_C_OBJ_FILES) $(LIBPCRE_CXX_OBJ_FILES) | dirs
 	$(AR) rcs $@ $^
 
-$(LIBPCRE_C_OBJ_FILES): obj/libpcre/%.o: $(srcdir)/pcre/%.c | dirs
+$(LIBPCRE_C_OBJ_FILES): $(obj)/libpcre/%.o: $(src)/pcre/%.c | dirs
 	$(CC) $(CFLAGS) $(LIBPCRE_CFLAGS) -c -o $@ $^
 
-$(LIBPCRE_CXX_OBJ_FILES): obj/libpcre/%.o: $(srcdir)/pcre/%.cpp | dirs
+$(LIBPCRE_CXX_OBJ_FILES): $(obj)/libpcre/%.o: $(src)/pcre/%.cpp | dirs
 	$(CXX) $(CXXFLAGS) $(LIBPCRE_CXXFLAGS) -c -o $@ $^

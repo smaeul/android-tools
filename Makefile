@@ -1,4 +1,5 @@
-srcdir := $(PWD)
+src := $(CURDIR)
+obj := $(CURDIR)/obj
 
 CC = clang
 CFLAGS ?= -g0 -Os
@@ -30,22 +31,22 @@ PREFIX = /usr
 all:
 
 clean:
-	rm -fr obj
+	rm -fr $(obj)
 
 distclean: clean
-	git -C $(srcdir)/core reset -q --hard
+	git -C $(src)/core reset -q --hard
 	rm -f .core.patch.stamp
 
-obj/%: %.py | dirs
+$(obj)/%: %.py | dirs
 	{ cp $< $@ && chmod +x $@; } || rm -f $@
 
-.core.patch.stamp: $(srcdir)/patches/core.patch \
-    $(srcdir)/core/adb/client/usb_linux.cpp \
-    $(srcdir)/core/adb/transport_usb.cpp \
-    $(srcdir)/core/adb/types.h \
-    $(srcdir)/core/libcrypto_utils/android_pubkey.c
-	git -C $(srcdir)/core reset -q --hard
-	cd $(srcdir)/core && patch -p1 -i $<
+.core.patch.stamp: $(src)/patches/core.patch \
+    $(src)/core/adb/client/usb_linux.cpp \
+    $(src)/core/adb/transport_usb.cpp \
+    $(src)/core/adb/types.h \
+    $(src)/core/libcrypto_utils/android_pubkey.c
+	git -C $(src)/core reset -q --hard
+	cd $(src)/core && patch -p1 -i $<
 	touch $@
 
 include rules/adb.mk
@@ -65,9 +66,9 @@ include rules/libusb.mk
 include rules/libutils.mk
 include rules/libziparchive.mk
 
-BINS += obj/mkbootimg/mkbootimg
-BINS += obj/mkbootimg/unpack_bootimg
-DIRS += obj/mkbootimg
+BINS += $(obj)/mkbootimg/mkbootimg
+BINS += $(obj)/mkbootimg/unpack_bootimg
+DIRS += $(obj)/mkbootimg
 
 BINS := $(sort $(BINS))
 DIRS := $(sort $(DIRS))
