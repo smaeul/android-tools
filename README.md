@@ -4,8 +4,10 @@ This is an effort to extract Android's low-level system imaging tools from its m
 as well as make sure they compile properly against the musl libc. The major feature here is
 accomplishing that goal while patching or modifying the upstream sources from AOSP as little as
 possible.  This makes updating much easier -- simply examining the changes to relevant `Android.bp`
-and `Android.mk` files, without worrying about source changes. I use these tools frequently, so this
-will get updated at least every couple of months.
+and `Android.mk` files, without worrying about source changes.
+
+**Update**: Google added protobuf as a dependency. I don't have the time to invest in this anymore,
+so I will no longer be making source code updates.
 
 ## Prerequisites
 
